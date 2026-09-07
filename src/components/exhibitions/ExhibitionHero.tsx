@@ -25,3 +25,4 @@ export function ExhibitionHero({ event }: { event: Exhibition }) {
     </section>
   );
 }
+  

@@ -24,7 +24,7 @@ export const company = {
   ],
   assets: {
     logo: 'https://futurextrade.com/images-event/icon/Futurex-Trade.webp',
-    hero: 'https://futurextrade.com/images-event/slider/3.webp',
+    hero: '/images/gallery/hero.png',
     exhibition: 'https://futurextrade.com/images-event/futurextrade.webp'
   }
 } as const;

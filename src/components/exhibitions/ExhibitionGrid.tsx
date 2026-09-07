@@ -1,41 +1,40 @@
 "use client";
 
 import { motion, type Variants } from 'framer-motion';
-import type { Exhibition } from '@/types/exhibition';
 import { ExhibitionCard } from './ExhibitionCard';
+import type { ExhibitionItem } from '@/data/exhibitions';
 
 const gridVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.05
+      staggerChildren: 0.06,
+      delayChildren: 0.04
     }
   }
 };
 
 export function ExhibitionGrid({ 
-  events, 
-  editorial = false 
+  events
 }: { 
-  events: Exhibition[]; 
-  editorial?: boolean;
+  events: ExhibitionItem[] | any[]; 
 }) {
   return (
     <motion.div 
       variants={gridVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
     >
-      {events.map((event, index) => (
+      {events.map((event) => (
         <ExhibitionCard 
-          key={event.slug} 
+          key={event.id || event.slug || event.title} 
           event={event} 
-          large={editorial && index === 0} 
         />
       ))}
     </motion.div>
   );
 }
+
+export default ExhibitionGrid;

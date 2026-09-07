@@ -1,354 +1,241 @@
-import type { Exhibition } from '@/types/exhibition';
-import { company } from './company';
+export interface ExhibitionItem {
+  id: string;
+  slug: string;
+  title: string;
+  edition?: string;
+  dates: string;
+  venue: string;
+  city: string;
+  country: 'India' | 'Nepal' | 'Bangladesh' | 'Kenya' | 'Uganda' | 'Tanzania';
+  industry: string;
+  year: string;
+  website: string;
+  logo: string;
+}
 
-type ExhibitionSeed = Omit<Exhibition, 'id' | 'description' | 'eventType' | 'image' | 'gallery' | 'status' | 'featured' | 'highlights'> & {
-  featured?: boolean;
-  status?: Exhibition['status'];
-};
-
-const makeExhibition = (seed: ExhibitionSeed, index: number): Exhibition => ({
-  ...seed,
-  id: `futurex-${String(index + 1).padStart(3, '0')}`,
-  description: `${seed.title} is part of the Futurex international exhibition portfolio, connecting manufacturers, suppliers, buyers and industry professionals in ${seed.city}.`,
-  eventType: 'Exhibition',
-  image: company.assets.exhibition,
-  gallery: [company.assets.exhibition, company.assets.hero],
-  status: seed.status ?? 'Upcoming',
-  featured: seed.featured ?? (seed.status !== 'Completed' && index < 6),
-  highlights: [
-    'Focused B2B exhibition environment',
-    'Manufacturer, supplier and buyer networking',
-    'Product, technology and solution discovery'
-  ]
-});
-
-const seeds: ExhibitionSeed[] = [
+export const featuredExhibitions: ExhibitionItem[] = [
   {
+    id: 'bangladesh-buildcon-2026',
     slug: 'bangladesh-buildcon-2026',
     title: '10th Bangladesh Buildcon International Expo',
-    shortTitle: 'Bangladesh Buildcon',
-    logo: 'https://futurextrade.com/images-event/2026/10th-Bangladesh-Buildcon-Logo-Coloured.png',
     edition: '10th Edition',
-    dateLabel: '17–19 September 2026',
-    startDate: '2026-09-17',
-    endDate: '2026-09-19',
-    year: 2026,
+    dates: '17th to 19th September 2026',
     venue: 'ICCB Exhibition Hall',
     city: 'Dhaka',
     country: 'Bangladesh',
-    industry: 'Building & Infrastructure',
-    featured: true
+    industry: 'Architecture & Building Materials',
+    year: '2026',
+    website: 'https://bangladeshbuildcon.com',
+    logo: '/images/logos/bangladesh-buildcon.png'
   },
   {
+    id: 'bangladesh-wood-metal-2026',
     slug: 'bangladesh-wood-metal-2026',
     title: '10th Bangladesh Wood & Metal Industries Expo',
-    shortTitle: 'Bangladesh Wood & Metal Industries Expo',
-    logo: 'https://futurextrade.com/images-event/2026/bangladesh-wood-expo-logo.png',
     edition: '10th Edition',
-    dateLabel: '17–19 September 2026',
-    startDate: '2026-09-17',
-    endDate: '2026-09-19',
-    year: 2026,
+    dates: '17th to 19th September 2026',
     venue: 'ICCB Exhibition Hall',
     city: 'Dhaka',
     country: 'Bangladesh',
-    industry: 'Wood & Woodworking',
-    featured: true
+    industry: 'Woodworking & Metal Machinery',
+    year: '2026',
+    website: 'https://bangladeshwood.com',
+    logo: '/images/logos/bangladesh-wood.png'
   },
   {
-    slug: 'india-ev-2026',
+    id: 'india-ev-show-2026',
+    slug: 'india-ev-show-2026',
     title: '8th Edition India EV International Show',
-    shortTitle: 'India EV International Show',
-    logo: 'https://futurextrade.com/images-event/2026/india-ev-logo.png',
     edition: '8th Edition',
-    dateLabel: '2–4 October 2026',
-    startDate: '2026-10-02',
-    endDate: '2026-10-04',
-    year: 2026,
+    dates: '2nd to 4th October 2026',
     venue: 'Auto Cluster Exhibition Centre',
     city: 'Pune',
     country: 'India',
-    industry: 'Electric Vehicles',
-    featured: true
+    industry: 'Electric Vehicles & Mobility Tech',
+    year: '2026',
+    website: 'https://indiaevshow.com',
+    logo: '/images/logos/india-ev.png'
   },
   {
-    slug: 'india-battery-2026',
+    id: 'india-battery-show-2026',
+    slug: 'india-battery-show-2026',
     title: 'India Battery International Show',
-    shortTitle: 'India Battery International Show',
-    logo: 'https://futurextrade.com/images-event/2026/india-battery-expo-logo.png',
-    dateLabel: '2–4 October 2026',
-    startDate: '2026-10-02',
-    endDate: '2026-10-04',
-    year: 2026,
+    edition: 'Annual Edition',
+    dates: '2nd to 4th October 2026',
     venue: 'Auto Cluster Exhibition Centre',
     city: 'Pune',
     country: 'India',
-    industry: 'Power & Energy',
-    featured: true
+    industry: 'Battery Tech & Energy Storage',
+    year: '2026',
+    website: 'https://indiabatteryshow.com',
+    logo: '/images/logos/india-battery.png'
   },
   {
-    slug: 'india-solar-2026',
+    id: 'india-solar-show-2026',
+    slug: 'india-solar-show-2026',
     title: 'India Solar International Show',
-    shortTitle: 'India Solar International Show',
-    logo: 'https://futurextrade.com/images-event/2026/india-solar-logo.png',
-    dateLabel: '2–4 October 2026',
-    startDate: '2026-10-02',
-    endDate: '2026-10-04',
-    year: 2026,
+    edition: 'Annual Edition',
+    dates: '2nd to 4th October 2026',
     venue: 'Auto Cluster Exhibition Centre',
     city: 'Pune',
     country: 'India',
-    industry: 'Power & Energy',
-    featured: true
+    industry: 'Photovoltaic & Solar Energy',
+    year: '2026',
+    website: 'https://indiasolarshow.com',
+    logo: '/images/logos/india-solar.png'
   },
   {
-    slug: 'nepal-electric-power-lights-2026',
+    id: 'nepal-electric-power-2026',
+    slug: 'nepal-electric-power-2026',
     title: "5th Nepal Electric, Power and Lights Int'l Expo",
-    shortTitle: 'Nepal Electric, Power and Lights Expo',
-    logo: 'https://futurextrade.com/images-event/2026/nepal-electric-power-and-light.png',
     edition: '5th Edition',
-    dateLabel: '4–6 September 2026',
-    startDate: '2026-09-04',
-    endDate: '2026-09-06',
-    year: 2026,
+    dates: '18th to 20th December 2026',
     venue: 'Bhrikuti Mandap',
     city: 'Kathmandu',
     country: 'Nepal',
-    industry: 'Power & Energy',
-    featured: true
+    industry: 'Power, Grid & Electrical Engineering',
+    year: '2026',
+    website: 'https://nepalelectricexpo.com',
+    logo: '/images/logos/nepal-electric.png'
   },
   {
-    slug: 'odisha-mining-infrastructure-2027',
+    id: 'odisha-mining-infra-2027',
+    slug: 'odisha-mining-infra-2027',
     title: "5th Odisha Mining & Infrastructure Int'l Expo",
-    shortTitle: 'Odisha Mining & Infrastructure Expo',
-    logo: 'https://futurextrade.com/images-event/2026/5th-Odisha-Logo_White.png',
     edition: '5th Edition',
-    dateLabel: '7–10 January 2027',
-    startDate: '2027-01-07',
-    endDate: '2027-01-10',
-    year: 2027,
+    dates: '7th to 10th January 2027',
     venue: 'Baramunda Ground',
-    city: 'Bhubaneswar',
-    region: 'Odisha',
+    city: 'Bhubaneswar, Odisha',
     country: 'India',
-    industry: 'Building & Infrastructure'
+    industry: 'Mining Machinery & Heavy Infrastructure',
+    year: '2027',
+    website: 'https://odishaminingexpo.com',
+    logo: '/images/logos/odisha-mining.png'
   },
   {
+    id: 'nepal-wood-2027',
     slug: 'nepal-wood-2027',
     title: '12th Edition Nepal Wood International Expo',
-    shortTitle: 'Nepal Wood International Expo',
-    logo: 'https://futurextrade.com/images-event/2026/nepal-wood-expo-logo.jpg',
     edition: '12th Edition',
-    dateLabel: '28–31 January 2027',
-    startDate: '2027-01-28',
-    endDate: '2027-01-31',
-    year: 2027,
+    dates: '28th to 31st January 2027',
     venue: 'Bhrikuti Mandap',
     city: 'Kathmandu',
     country: 'Nepal',
-    industry: 'Wood & Woodworking'
+    industry: 'Wood Processing & Furniture Tech',
+    year: '2027',
+    website: 'https://nepalwood.com',
+    logo: '/images/logos/nepal-wood.png'
   },
   {
+    id: 'nepal-agritech-2027',
     slug: 'nepal-agritech-2027',
     title: '9th Nepal Agritech International Expo',
-    shortTitle: 'Nepal Agritech International Expo',
-    logo: 'https://futurextrade.com/images-event/2026/Artboard%2020.png',
     edition: '9th Edition',
-    dateLabel: '18–20 February 2027',
-    startDate: '2027-02-18',
-    endDate: '2027-02-20',
-    year: 2027,
+    dates: '18th to 20th February 2027',
     venue: 'Bhrikuti Mandap',
     city: 'Kathmandu',
     country: 'Nepal',
-    industry: 'Agriculture'
+    industry: 'Agri Machinery & Farm Automation',
+    year: '2027',
+    website: 'https://nepalagritech.com',
+    logo: '/images/logos/nepal-agritech.png'
   },
   {
+    id: 'nepal-buildcon-2027',
     slug: 'nepal-buildcon-2027',
     title: '12th Nepal Buildcon International Expo',
-    shortTitle: 'Nepal Buildcon International Expo',
-    logo: 'https://futurextrade.com/images-event/2026/12th-Nepal-Buildcon-Logo-Coloured.png',
     edition: '12th Edition',
-    dateLabel: '25–28 February 2027',
-    startDate: '2027-02-25',
-    endDate: '2027-02-28',
-    year: 2027,
+    dates: '25th to 28th February 2027',
     venue: 'Bhrikuti Mandap',
     city: 'Kathmandu',
     country: 'Nepal',
-    industry: 'Building & Infrastructure'
+    industry: 'Construction & Heavy Equipment',
+    year: '2027',
+    website: 'https://nepalbuildcon.com',
+    logo: '/images/logos/nepal-buildcon.png'
   },
   {
+    id: 'kenya-buildcon-2027',
     slug: 'kenya-buildcon-2027',
     title: '4th Edition Kenya Buildcon International Expo',
-    shortTitle: 'Kenya Buildcon International Expo',
-    logo: 'https://futurextrade.com/images-event/2026/kenya-buildcon-expo-logo.jpg',
     edition: '4th Edition',
-    dateLabel: '9–11 June 2027',
-    startDate: '2027-06-09',
-    endDate: '2027-06-11',
-    year: 2027,
+    dates: '9th to 11th June 2027',
     venue: 'The Sarit Expo Centre',
     city: 'Nairobi',
     country: 'Kenya',
-    industry: 'Building & Infrastructure'
+    industry: 'Building Construction & Materials',
+    year: '2027',
+    website: 'https://kenyabuildcon.com',
+    logo: '/images/logos/kenya-buildcon.png'
   },
   {
+    id: 'kenya-wood-2027',
     slug: 'kenya-wood-2027',
     title: '4th Edition Kenya Wood International Expo',
-    shortTitle: 'Kenya Wood International Expo',
-    logo: 'https://futurextrade.com/images-event/2026/Artboard%202%20copy0.png',
     edition: '4th Edition',
-    dateLabel: '9–11 June 2027',
-    startDate: '2027-06-09',
-    endDate: '2027-06-11',
-    year: 2027,
+    dates: '9th to 11th June 2027',
     venue: 'The Sarit Expo Centre',
     city: 'Nairobi',
     country: 'Kenya',
-    industry: 'Wood & Woodworking'
+    industry: 'Woodworking Machinery & Timber',
+    year: '2027',
+    website: 'https://kenyawood.com',
+    logo: '/images/logos/kenya-wood.png'
   },
   {
-    slug: 'kenya-solar-electric-power-lights-2027',
+    id: 'kenya-solar-electric-2027',
+    slug: 'kenya-solar-electric-2027',
     title: '3rd Kenya Solar, Electric, Power & Lights Expo',
-    shortTitle: 'Kenya Solar, Electric, Power & Lights Expo',
-    logo: 'https://futurextrade.com/images-event/2026/Artboard%202%20copy%2020.png',
     edition: '3rd Edition',
-    dateLabel: '9–11 June 2027',
-    startDate: '2027-06-09',
-    endDate: '2027-06-11',
-    year: 2027,
+    dates: '9th to 11th June 2027',
     venue: 'The Sarit Expo Centre',
     city: 'Nairobi',
     country: 'Kenya',
-    industry: 'Power & Energy'
+    industry: 'Solar Grid & Lighting Technology',
+    year: '2027',
+    website: 'https://kenyasolarexpo.com',
+    logo: '/images/logos/kenya-solar.png'
   },
   {
+    id: 'uganda-buildcon-2027',
     slug: 'uganda-buildcon-2027',
     title: '6th Edition Uganda Buildcon International Expo',
-    shortTitle: 'Uganda Buildcon International Expo',
-    logo: 'https://futurextrade.com/images-event/2026/Artboard%202%20copy%2040.png',
     edition: '6th Edition',
-    dateLabel: '4–6 August 2027',
-    startDate: '2027-08-04',
-    endDate: '2027-08-06',
-    year: 2027,
-    venue: 'UMA Show Grounds',
+    dates: '4th to 6th August 2027',
+    venue: 'Uma Show Grounds',
     city: 'Kampala',
     country: 'Uganda',
-    industry: 'Building & Infrastructure'
+    industry: 'Commercial Construction & Engineering',
+    year: '2027',
+    website: 'https://ugandabuildcon.com',
+    logo: '/images/logos/uganda-buildcon.png'
   },
   {
-    slug: 'bangladesh-texchem-2027',
-    title: 'Bangladesh TexChem Expo 2027',
-    shortTitle: 'Bangladesh TexChem Expo',
-    dateLabel: '12–15 August 2027',
-    startDate: '2027-08-12',
-    endDate: '2027-08-15',
-    year: 2027,
-    venue: 'ICCB',
-    city: 'Dhaka',
-    country: 'Bangladesh',
-    industry: 'Garments'
-  },
-  {
+    id: 'tanzania-buildcon-2027',
     slug: 'tanzania-buildcon-2027',
     title: 'Tanzania Buildcon International Expo',
-    shortTitle: 'Tanzania Buildcon International Expo',
-    logo: 'https://futurextrade.com/images-event/2026/tanzania-buildcon-logo.png',
-    dateLabel: '25–27 August 2027',
-    startDate: '2027-08-25',
-    endDate: '2027-08-27',
-    year: 2027,
+    edition: 'Inaugural Edition',
+    dates: '25th to 27th August 2027',
     venue: 'Diamond Jubilee Expo Center',
     city: 'Dar-es-Salaam',
     country: 'Tanzania',
-    industry: 'Building & Infrastructure'
+    industry: 'Building Technology & Project Architecture',
+    year: '2027',
+    website: 'https://tanzaniabuildcon.com',
+    logo: '/images/logos/tanzania-buildcon.png'
   },
   {
-    slug: 'corru-pack-print-india-2028',
+    id: 'icpma-corru-pack-2028',
+    slug: 'icpma-corru-pack-2028',
     title: '3rd Edition ICPMA Corru Pack Print India',
-    shortTitle: 'ICPMA Corru Pack Print India',
-    logo: 'https://futurextrade.com/images-event/2026/3rd-Corrupack-Logo-2027-page-1-Photoroom.png',
     edition: '3rd Edition',
-    dateLabel: '9–12 February 2028',
-    startDate: '2028-02-09',
-    endDate: '2028-02-12',
-    year: 2028,
+    dates: '9th to 12th February 2028',
     venue: 'Yashobhoomi, IICC, Dwarka',
     city: 'New Delhi',
     country: 'India',
-    industry: 'Printing & Packaging'
-  },
-  {
-    slug: 'odisha-mining-infrastructure-2026',
-    title: '4th Odisha Mining and Infrastructure International Expo',
-    shortTitle: 'Odisha Mining and Infrastructure Expo',
-    edition: '4th Edition',
-    dateLabel: '8–11 January 2026',
-    startDate: '2026-01-08',
-    endDate: '2026-01-11',
-    year: 2026,
-    venue: 'Baramunda Ground',
-    city: 'Bhubaneswar',
-    region: 'Odisha',
-    country: 'India',
-    industry: 'Building & Infrastructure',
-    status: 'Completed',
-    featured: false
-  },
-  {
-    slug: 'nepal-agritech-2026',
-    title: '8th Nepal Agritech International Expo 2026',
-    shortTitle: 'Nepal Agritech International Expo',
-    edition: '8th Edition',
-    dateLabel: '16–18 January 2026',
-    startDate: '2026-01-16',
-    endDate: '2026-01-18',
-    year: 2026,
-    venue: 'Chitwan Expo Center',
-    city: 'Bharatpur',
-    country: 'Nepal',
-    industry: 'Agriculture',
-    status: 'Completed',
-    featured: false
-  },
-  {
-    slug: 'nepal-buildcon-2026',
-    title: '11th Nepal Buildcon International Expo',
-    shortTitle: 'Nepal Buildcon International Expo',
-    edition: '11th Edition',
-    dateLabel: '5–8 February 2026',
-    startDate: '2026-02-05',
-    endDate: '2026-02-08',
-    year: 2026,
-    venue: 'Bhrikuti Mandap',
-    city: 'Kathmandu',
-    country: 'Nepal',
-    industry: 'Building & Infrastructure',
-    status: 'Completed',
-    featured: false
-  },
-  {
-    slug: 'corru-pack-print-india-2026',
-    title: '2nd Edition Corru Pack Print India',
-    shortTitle: 'Corru Pack Print India',
-    edition: '2nd Edition',
-    dateLabel: '19–22 March 2026',
-    startDate: '2026-03-19',
-    endDate: '2026-03-22',
-    year: 2026,
-    venue: 'Bombay Exhibition Center, NESCO, Goregaon',
-    city: 'Mumbai',
-    region: 'Maharashtra',
-    country: 'India',
-    industry: 'Printing & Packaging',
-    status: 'Completed',
-    featured: false
+    industry: 'Corrugated Packaging & Printing Tech',
+    year: '2028',
+    website: 'https://corrupackprint.com',
+    logo: '/images/logos/icpma-corru.png'
   }
-
 ];
-
-export const exhibitions = seeds.map(makeExhibition);
-export const featuredExhibitions = exhibitions.filter((event) => event.featured);
-export const getExhibition = (slug: string) => exhibitions.find((event) => event.slug === slug);
